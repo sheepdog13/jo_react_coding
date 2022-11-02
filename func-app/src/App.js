@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react'
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 
 function App() {
   return (
@@ -11,7 +11,8 @@ function App() {
     </div>
   );
 }
-
+var funcStyle = 'color:blue'
+var funcId = 0;
 function FuncComp(props){
   var numberState = useState(props.initNumber)
   var number = numberState[0];
@@ -23,6 +24,14 @@ function FuncComp(props){
   // var setDate = dateState[1];
 
   var [date, setDate] = useState((new Date().toString()))
+
+  // side Effect
+  useEffect(function(){
+    console.log('%cfunc => useEffect '+(++funcId), funcStyle)
+    document.title = number+' : ' +date; 
+  })
+
+  console.log('%cfunc => render '+(++funcId), funcStyle)
   return (
     <div className="container">
       <h2>function style component</h2>
